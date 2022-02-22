@@ -114,7 +114,7 @@ const Hamburger = ({ items }) => {
                         <>
                           {id === el.parentId && (
                             <Link href={el.path} className="mt-10">
-                              <a>{el.label}</a>
+                              <a className="font-thin">{el.label}</a>
                             </Link>
                           )}
                         </>
