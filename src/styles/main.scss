@@ -1,0 +1,129 @@
+// @import "~tailwindcss/base";
+// @import "~tailwindcss/components";
+// @import "~tailwindcss/utilities";
+
+@tailwind base;
+@tailwind components;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,700;0,900;1,400&display=swap');
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+
+:root {
+  --primary-color: #E0C5AC;
+  --secondary-color: #C19473;
+  --violet: #8B2121;
+  --brown: #80493A;
+}
+
+.color-brown {
+  color: var(--brown)
+}
+.color-violet {
+  color: var(--violet)
+}
+
+.color-primary {
+  color: var(--primary-color)
+}
+.color-secondary {
+  color: var(--secondary-color)
+}
+
+.bg-violet {
+  background-color: var(--violet)
+}
+.bg-brown {
+  background-color: var(--brown)
+}
+
+.bg-primary {
+  background-color: var(--primary-color)
+}
+.bg-secondary {
+  background-color: var(--secondary-color)
+}
+
+.border-brown {
+  border-color: var(--brown)
+}
+.border-violet {
+  border-color: var(--violet)
+}
+
+.border-primary {
+  border-color: var(--primary-color)
+}
+.border-secondary {
+  border-color: var(--secondary-color)
+}
+
+.msl {
+  border-radius: 0 !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 1px solid black !important;
+  margin: 10px 0 !important;
+}
+
+
+#hero div:nth-child(1) {}
+#hero div:nth-child(2) {}
+#hero div:nth-child(3) {
+  background-color: var(--secondary-color);
+}
+#hero div:nth-child(4) {}
+#hero div:nth-child(5) {}
+
+#cart-div {
+  width: 300px;
+}
+
+#closeXsearch {
+  padding-left: 5px;
+}
+
+#close-cart-p {
+  margin-top: 2px;
+}
+
+#mobile-search-close-p {
+  margin-top: -20px;
+}
+
+/* Fix Algolia mobile-searchbox design issues */
+#mobilesearchdiv {
+  position: absolute;
+  height: 200px;
+}
+
+.ais-SearchBox-submit {
+  width: 48px;
+}
+
+.ais-SearchBox-submitIcon {
+  display: none;
+}
+
+.ais-SearchBox-reset {
+  margin-left: 10px;
+}
+
+
+/* ACCORDION */
+.Collapsible {
+  border-bottom: 1px solid black;
+  padding: 15px 0;
+  width: 50%;
+}
+
+
+// NProgress style.
+// @import 'nprogress/nprogress.css';
+
+
+@tailwind utilities;
