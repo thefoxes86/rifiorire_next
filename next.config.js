@@ -1,25 +1,43 @@
 const path = require("path");
-const allowedImageWordPressDomain = new URL(process.env.NEXT_PUBLIC_WORDPRESS_URL).hostname
+const allowedImageWordPressDomain = new URL(
+  process.env.NEXT_PUBLIC_WORDPRESS_URL
+).hostname;
 
 module.exports = {
-    trailingSlash: true,
-    webpackDevMiddleware: (config) => {
-        config.watchOptions = {
-            poll: 1000,
-            aggregateTimeout: 300,
-        };
+  trailingSlash: true,
+  webpackDevMiddleware: (config) => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    };
 
-        return config;
-    },
-    sassOptions: {
-        includePaths: [path.join(__dirname, "styles")],
-    },
-    /**
-     * We specify which domains are allowed to be optimized.
-     * This is needed to ensure that external urls can't be abused.
-     * @see https://nextjs.org/docs/basic-features/image-optimization#domains
-     */
-    images: {
-        domains: [ allowedImageWordPressDomain, 'via.placeholder.com' ],
-    },
+    return config;
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+  /**
+   * We specify which domains are allowed to be optimized.
+   * This is needed to ensure that external urls can't be abused.
+   * @see https://nextjs.org/docs/basic-features/image-optimization#domains
+   */
+  images: {
+    domains: [allowedImageWordPressDomain, "via.placeholder.com"],
+  },
+
+  async redirects() {
+    return [
+      process.env.MAINTENANCE_MODE && process.env.NODE_ENV === "production"
+        ? {
+            source: "/((?!coming-soon|_next).*)",
+            destination: "/coming-soon",
+            permanent: false,
+          }
+        : {
+            source: "/tetetetetetete",
+            destination: "/teteteyeteyet",
+            permanent: false,
+          },
+    ];
+  },
 };

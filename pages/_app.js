@@ -1,8 +1,10 @@
 import "../src/styles/style.scss";
 import "../src/styles/main.scss";
+import "../src/styles/maintenance.scss";
 
 import Router from "next/router";
 import NProgress from "nprogress";
+import { useEffect } from "react";
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());

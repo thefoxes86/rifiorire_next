@@ -1,0 +1,58 @@
+// Maintenance Mode 
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap");
+
+      body {
+        font-family: "Lato", sans-serif;
+      }
+      .container_maintenance {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 20% 60% 20%;
+        grid-template-areas: "top_area" "content_logo" "bottom_area";
+      }
+      .top__banner {
+        grid-area: top_area;
+      }
+      .top__banner img {
+        object-position: bottom;
+      }
+      .bottom__banner img {
+        object-position: top;
+      }
+      .top__banner img,
+      .bottom__banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .content {
+        grid-area: content_logo;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .content svg {
+        width: 400px;
+        padding-bottom: 50px;
+      }
+      .content h1 {
+        font-size: 36px;
+        font-weight: 100;
+        margin: 0 10px;
+      }
+      .bottom_banner {
+        grid-area: bottom_area;
+      }
+      .cls-1 {
+        fill: #e0c5ac;
+      }
+      .cls-2 {
+        fill: #c09473;
+      }

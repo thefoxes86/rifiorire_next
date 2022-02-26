@@ -40,7 +40,7 @@ export default function CategorySingle(props) {
       <div className="product-categories-container container mx-auto my-32 px-4 xl:px-0">
         <TitleAndText title={categoryName} color="black" text="" />
         <div className="container mx-auto my-10 w-100 flex flex-col items-start justify-center">
-          <Link href="/categorie">
+          <Link href="/categories">
             <a>
               <h3 className="color-primary text-lg font-thin">
                 tutte le categorie
