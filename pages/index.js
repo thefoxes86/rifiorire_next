@@ -8,8 +8,15 @@ import CustomButton from "../src/components/CustomButton";
 import BackroundImage from "../src/components/BackgroundImage";
 import Helmet from "helmet";
 import Layout from "../src/components/Layout";
+import { useEffect } from "react";
+import Router from "next/router";
 
 const Home = ({ secondCategory, firstCategory, page, pagebuilder, menu }) => {
+  useEffect(() => {
+    const { pathname } = Router;
+    console.log("Pathname", pathname);
+    pathname === "*" && Router.push("/");
+  }, []);
   return (
     <>
       <Layout menu={menu}>
@@ -72,7 +79,6 @@ export async function getStaticProps() {
   return {
     props: {
       page: data.page,
-      menu: data.menu.menuItems.nodes,
       pagebuilder: data.page.pagebuilder,
       firstCategory: data.firstCategory.nodes,
       secondCategory: data.secondCategory.nodes,

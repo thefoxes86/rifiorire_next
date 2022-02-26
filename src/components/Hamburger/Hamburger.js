@@ -47,12 +47,13 @@ const Hamburger = ({ items }) => {
 
   useEffect(() => {
     // items.splice(0, 2);
-    items.forEach((el, index) => {
-      let item = items.find((data) => data.id === el.parentId);
+    items &&
+      items.forEach((el, index) => {
+        let item = items.find((data) => data.id === el.parentId);
 
-      // item ? setMenu(...menu, item) : setMenu(...menu, el);
-    });
-  }, []);
+        // item ? setMenu(...menu, item) : setMenu(...menu, el);
+      });
+  }, [items]);
 
   return (
     <>

@@ -19,7 +19,7 @@ const Layout = (props) => {
           <Head>
             <title>Woocommerce React Theme</title>
           </Head>
-          <Header menu={props.menu} />
+          <Header />
           {props.children}
           <Footer />
         </div>

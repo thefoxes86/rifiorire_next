@@ -134,16 +134,6 @@ const GQL_RIFIORIRECASA = gql`
         }
       }
     }
-    menu(idType: NAME, id: "primary") {
-      menuItems(where: { location: PRIMARY }) {
-        nodes {
-          id
-          path
-          label
-          parentId
-        }
-      }
-    }
   }
 `;
 
@@ -152,6 +142,7 @@ const GQL_RIFIOMENU = gql`
     menu(idType: NAME, id: "primary") {
       menuItems(where: { location: PRIMARY }) {
         nodes {
+          id
           path
           label
           parentId
