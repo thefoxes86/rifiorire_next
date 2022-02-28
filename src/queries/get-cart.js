@@ -81,6 +81,15 @@ const GET_CART = gql`
       feeTotal
       discountTax
       discountTotal
+      availableShippingMethods {
+        packageDetails
+        rates {
+          id
+          label
+          cost
+          methodId
+        }
+      }
     }
   }
 `;

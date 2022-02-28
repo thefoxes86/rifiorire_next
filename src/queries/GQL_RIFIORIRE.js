@@ -1,43 +1,59 @@
 import { gql } from "@apollo/client";
 
 const GQL_RIFIORIRECASA = gql`
-  query MyQuery {
+  query HomeRifio {
     page(id: "61", idType: DATABASE_ID) {
       id
       title(format: RENDERED)
       content(format: RENDERED)
       pagebuilder {
-        category {
-          title
-          url
+        aboutSectionText
+        aboutSectionTitle
+        aboutSectionImage {
+          srcSet(size: LARGE)
+          mediaItemUrl
         }
-        category2 {
-          title
-          url
-        }
-        linkSection1 {
-          url
-        }
-        linkSection2 {
-          url
-        }
+        category
+        category2
         imageCategory1 {
           srcSet(size: LARGE)
-          link
+          mediaItemUrl
         }
         imageCategory2 {
-          srcSet(size: LARGE)
-          link
+          mediaItemUrl
+          srcSet
         }
-        textSection2
-        textSections1
+        imagePreFooterFull {
+          mediaItemUrl
+          srcSet
+        }
+        singleLinkSection1
+        singleLinkSection2
+        singleTextSection1
+        singleTextSection2
+        singleTitleSection1
+        singleTitleSection2
+        slides {
+          buttonLink
+          buttonText
+          fieldGroupName
+          image {
+            mediaItemUrl
+            srcSet
+          }
+        }
+        textCategory1
+        textCategory2
         titleCategory1
         titleCategory2
-        titleSection1
-        titleSection2
       }
     }
-    firstCategory: products(first: 2, where: { categoryId: 31 }) {
+  }
+`;
+
+const FIRST_CATEGORY_HOME = gql`
+  query firstCategory($cat1: String!, $cat2: String!) {
+    firstCategory: products(first: 2, where: { category: $cat1 }) {
       nodes {
         id
         databaseId
@@ -45,7 +61,6 @@ const GQL_RIFIORIRECASA = gql`
         averageRating
         slug
         description
-        date
         image {
           id
           uri
@@ -86,7 +101,7 @@ const GQL_RIFIORIRECASA = gql`
         }
       }
     }
-    secondCategory: products(first: 2, where: { categoryId: 32 }) {
+    secondCategory: products(first: 2, where: { category: $cat2 }) {
       nodes {
         id
         databaseId
@@ -152,4 +167,4 @@ const GQL_RIFIOMENU = gql`
   }
 `;
 
-export { GQL_RIFIOMENU, GQL_RIFIORIRECASA };
+export { GQL_RIFIOMENU, GQL_RIFIORIRECASA, FIRST_CATEGORY_HOME };

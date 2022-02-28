@@ -1,5 +1,8 @@
 import client from "../src/components/ApolloClient";
-import { GQL_RIFIORIRECASA } from "../src/queries/GQL_RIFIORIRE";
+import {
+  FIRST_CATEGORY_HOME,
+  GQL_RIFIORIRECASA,
+} from "../src/queries/GQL_RIFIORIRE";
 import Slider from "../src/components/Slider";
 import TitleAndText from "../src/components/TitleAndText";
 import CategoryProductsLeft from "../src/components/CategoryProductsLeft";
@@ -8,8 +11,28 @@ import CustomButton from "../src/components/CustomButton";
 import BackroundImage from "../src/components/BackgroundImage";
 import Helmet from "helmet";
 import Layout from "../src/components/Layout";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 
-const Home = ({ secondCategory, firstCategory, page, pagebuilder, menu }) => {
+const Home = ({ page, pagebuilder, menu }) => {
+  const [products, setProducts] = useState({
+    firstCategory: "",
+    secondCategory: "",
+  });
+  const productRequest =
+    pagebuilder &&
+    client.query({
+      query: FIRST_CATEGORY_HOME,
+      variables: {
+        cat1: pagebuilder.category || "new-arrivals",
+        cat2: pagebuilder.category2 || "new-arrivals",
+      },
+    });
+
+  productRequest.then((res) => {
+    setProducts(res.data);
+  });
+
   return (
     <>
       <Layout menu={menu}>
@@ -23,40 +46,62 @@ const Home = ({ secondCategory, firstCategory, page, pagebuilder, menu }) => {
             key="pagetitle"
           />
         </Helmet>
-        <Slider />
-        <TitleAndText
-          title={pagebuilder.titleSection1 || ""}
-          text={pagebuilder.textSections1 || ""}
-          link={pagebuilder.linkSection1 || "#"}
-          color="violet"
-        />
-        <CategoryProductsLeft
-          title={pagebuilder.titleCategory1 || ""}
-          link={pagebuilder.linkSection1 || "#"}
-          img={pagebuilder.imageCategory1 || ""}
-          products={firstCategory}
-        />
-        <CategoryProductsRight
-          title={pagebuilder.titleCategory2 || ""}
-          link={pagebuilder.linkSection2 || "#"}
-          img={pagebuilder.imageCategory2 || ""}
-          products={secondCategory}
-        />
-        <CustomButton path="#" text="Category" withLine={true} color="black" />
-        {/* {secondCategory && <IndexProductsLittle products={secondCategory} />} */}
-        <BackroundImage
-          img="images/demo-about-image.png"
-          title="Ciao, siamo Rebecca e Simone"
-          text="Pensiamo che ogni gioiello debba essere…"
-          link="#"
-        />
-        <TitleAndText
-          title={pagebuilder.titleSection2 || ""}
-          text={pagebuilder.textSection2 || ""}
-          link={pagebuilder.linkSection2 || "#"}
-          color="primary"
-        />
-        <BackroundImage img="images/demo-footer-img.png" />
+        {pagebuilder && (
+          <>
+            <Slider slides={pagebuilder.slides} />
+            <TitleAndText
+              title={pagebuilder.singleTitleSection1 || ""}
+              text={pagebuilder.singleTextSection1 || ""}
+              link={pagebuilder.singleLinkSection1 || "#"}
+              color="violet"
+            />
+            {products.firstCategory && (
+              <CategoryProductsLeft
+                title={pagebuilder.titleCategory1 || ""}
+                link={`/category/${pagebuilder.category1}` || "#"}
+                img={pagebuilder.imageCategory1 || ""}
+                products={products.firstCategory.nodes}
+              />
+            )}
+            {products.secondCategory && (
+              <CategoryProductsRight
+                title={pagebuilder.titleCategory2 || ""}
+                link={`/category/${pagebuilder.category2}` || "#"}
+                img={pagebuilder.imageCategory2 || ""}
+                products={products.secondCategory.nodes}
+              />
+            )}
+            <CustomButton
+              path="#"
+              text="Category"
+              withLine={true}
+              color="black"
+            />
+            {/* {secondCategory && <IndexProductsLittle products={secondCategory} />} */}
+            <BackroundImage
+              img={
+                (pagebuilder.aboutSectionImage.mediaItemUrl &&
+                  pagebuilder.aboutSectionImage.mediaItemUrl) ||
+                "images/demo-about-image.png"
+              }
+              title={pagebuilder.aboutSectionTitle}
+              text={pagebuilder.aboutSectionText}
+              link="#"
+            />
+            <TitleAndText
+              title={pagebuilder.singleTitleSection2 || ""}
+              text={pagebuilder.singleTextSection2 || ""}
+              link={pagebuilder.singleLinkSection2 || "#"}
+              color="primary"
+            />
+            <BackroundImage
+              img={
+                pagebuilder.imagePreFooterFull.mediaItemUrl ||
+                "images/demo-footer-img.png"
+              }
+            />
+          </>
+        )}
       </Layout>
     </>
   );
@@ -73,8 +118,6 @@ export async function getStaticProps() {
     props: {
       page: data.page,
       pagebuilder: data.page.pagebuilder,
-      firstCategory: data.firstCategory.nodes,
-      secondCategory: data.secondCategory.nodes,
       loading,
       networkStatus,
     },
