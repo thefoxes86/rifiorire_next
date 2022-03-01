@@ -10,12 +10,10 @@ const Footer = () => (
         <FooterLink
           title="INFO"
           list={[
-            { name: "CONTATTI", link: "#" },
-            { name: "MATERIALI", link: "#" },
-            { name: "GUIDA DELLE TAGLIE", link: "#" },
-            { name: "PAGAMENTI E SPEDIZIONI", link: "#" },
-            { name: "RESI", link: "#" },
-            { name: "TERMINI E CONDIZIONI", link: "#" },
+            { name: "CONTATTI", link: "/contatti" },
+            { name: "MATERIALI", link: "/materiali" },
+            { name: "GUIDA DELLE TAGLIE", link: "/guida-alle-taglie" },
+            { name: "RESI", link: "/reso" },
           ]}
         />
       </div>
@@ -23,7 +21,7 @@ const Footer = () => (
         <FooterLink
           title="L'AZIENDA"
           list={[
-            { name: "ABOUT US", link: "#" },
+            { name: "ABOUT US", link: "/about-us" },
             { name: "IL NEGOZIO", link: "#" },
           ]}
         />
@@ -32,8 +30,8 @@ const Footer = () => (
         <FooterLink
           title="NOTE LEGALI"
           list={[
-            { name: "CONDIZIONI DI VENDITA", link: "#" },
-            { name: "PRIVACY POLICY", link: "#" },
+            { name: "CONDIZIONI DI VENDITA", link: "/condizioni-generali" },
+            { name: "PRIVACY POLICY", link: "/privacy-policy" },
           ]}
         />
       </div>

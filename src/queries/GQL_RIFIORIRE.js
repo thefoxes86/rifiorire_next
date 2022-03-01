@@ -167,4 +167,41 @@ const GQL_RIFIOMENU = gql`
   }
 `;
 
-export { GQL_RIFIOMENU, GQL_RIFIORIRECASA, FIRST_CATEGORY_HOME };
+const GQL_RIFIORIRECHISIAMO = gql`
+  query AboutRifio {
+    page(id: "162", idType: DATABASE_ID) {
+      id
+      title(format: RENDERED)
+      content(format: RENDERED)
+    }
+  }
+`;
+
+const GQL_RIFIORIRECONTATTI = gql`
+  query ContattiRifio {
+    page(id: "164", idType: DATABASE_ID) {
+      id
+      title(format: RENDERED)
+      content(format: RENDERED)
+    }
+  }
+`;
+
+const GQL_RIFIORIREGENERICPAGE = gql`
+  query PageGeneralRifio($idPage: ID!) {
+    page(id: $idPage, idType: DATABASE_ID) {
+      id
+      title(format: RENDERED)
+      content(format: RENDERED)
+    }
+  }
+`;
+
+export {
+  GQL_RIFIOMENU,
+  GQL_RIFIORIRECASA,
+  FIRST_CATEGORY_HOME,
+  GQL_RIFIORIRECHISIAMO,
+  GQL_RIFIORIRECONTATTI,
+  GQL_RIFIORIREGENERICPAGE,
+};

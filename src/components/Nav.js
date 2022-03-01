@@ -16,7 +16,7 @@ const Nav = ({ menu }) => {
         <div className="container flex flex-wrap items-center justify-between px-6 mx-auto mt-0">
           <div className="order-2 md:order-1 flex items-center">
             <Hamburger items={menu} />
-            <SearchIcon />
+            {/* <SearchIcon /> */}
           </div>
           <div className="order-1 md:order-2">
             <Link href="/">
