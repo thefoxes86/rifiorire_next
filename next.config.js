@@ -27,7 +27,8 @@ module.exports = {
 
   async redirects() {
     return [
-      process.env.MAINTENANCE_MODE && process.env.NODE_ENV === "production"
+      process.env.NEXT_PUBLIC_MAINTENANCE_MODE &&
+      process.env.NODE_ENV === "production"
         ? {
             source: "/((?!coming-soon|_next).*)",
             destination: "/coming-soon",
