@@ -46,6 +46,7 @@ const Home = ({ page, pagebuilder, menu }) => {
             key="pagetitle"
           />
         </Helmet>
+
         {pagebuilder && (
           <>
             <Slider slides={pagebuilder.slides} />
@@ -77,7 +78,7 @@ const Home = ({ page, pagebuilder, menu }) => {
               withLine={true}
               color="black"
             />
-            {/* {secondCategory && <IndexProductsLittle products={secondCategory} />} */}
+
             <BackroundImage
               img={
                 (pagebuilder.aboutSectionImage.mediaItemUrl &&

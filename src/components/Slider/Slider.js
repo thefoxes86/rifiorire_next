@@ -37,8 +37,8 @@ const Slider = ({ slides }) => {
             style={{ backgroundImage: `url(${slides[0].image.mediaItemUrl})` }}
           >
             <CustomButton
-              text={slides[0].buttonText}
-              path={slides[0].buttonLink}
+              text={slides[0].buttonText || ""}
+              path={slides[0].buttonLink || "#"}
               color="primary"
             />
           </div>
@@ -62,8 +62,8 @@ const Slider = ({ slides }) => {
             style={{ backgroundImage: `url(${slides[1].image.mediaItemUrl})` }}
           >
             <CustomButton
-              text={slides[1].buttonText}
-              path={slides[1].buttonLink}
+              text={slides[1].buttonText || ""}
+              path={slides[1].buttonLink || "#"}
               color="brown"
             />
           </div>
@@ -72,8 +72,8 @@ const Slider = ({ slides }) => {
             style={{ backgroundImage: `url(${slides[2].image.mediaItemUrl})` }}
           >
             <CustomButton
-              text={slides[2].buttonText}
-              path={slides[2].buttonLink}
+              text={slides[2].buttonText || ""}
+              path={slides[2].buttonLink || "#"}
               color="violet"
             />
           </div>
