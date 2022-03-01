@@ -9,6 +9,9 @@ import { gql } from "@apollo/client";
 const UPDATE_CART = gql`
   mutation UPDATE_CART($input: UpdateItemQuantitiesInput!) {
     updateItemQuantities(input: $input) {
+      cart {
+        shippingTotal
+      }
       items {
         key
         product {
@@ -63,7 +66,6 @@ const UPDATE_CART = gql`
         quantity
         total
         subtotal
-        shippingTotal
         subtotalTax
       }
       removed {

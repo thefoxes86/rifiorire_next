@@ -21,6 +21,7 @@ import CheckboxField from "./form-elements/CheckboxField";
 import CLEAR_CART_MUTATION from "../../mutations/clear-cart";
 import ShippingMethods from "./ShippingMethods";
 import UPDATE_CART from "../../mutations/update-cart";
+import UPDATE_SHIPPING_METHODS from "../../mutations/update-shipping-method";
 
 // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
 // const defaultCustomerInfo = {
@@ -111,14 +112,14 @@ const CheckoutForm = ({ countriesData }) => {
     },
   });
 
-  const [updateCart, { data: shipping, loading, error }] = useMutation(
-    UPDATE_CART,
-    {
-      onCompleted: () => {
-        // refetch();
-      },
-    }
-  );
+  const [
+    updateShippingMethod,
+    { data: shipping, loading, error },
+  ] = useMutation(UPDATE_SHIPPING_METHODS, {
+    onCompleted: () => {
+      refetch();
+    },
+  });
   const [clearCartMutation] = useMutation(CLEAR_CART_MUTATION);
 
   /*
@@ -200,13 +201,13 @@ const CheckoutForm = ({ countriesData }) => {
   ) => {
     const { target } = event || {};
 
-    updateCart({
-      variables: {
-        input: {
-          shippingTotal: "18.00",
-        },
-      },
-    });
+    // updateShippingMethod({
+    //   variables: {
+    //     input: {
+    //       shippingMethods: ["standard"],
+    //     },
+    //   },
+    // });
 
     if ("createAccount" === target.name) {
       handleCreateAccount(input, setInput, target);
