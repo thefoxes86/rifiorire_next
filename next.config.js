@@ -24,21 +24,4 @@ module.exports = {
   images: {
     domains: [allowedImageWordPressDomain, "via.placeholder.com"],
   },
-
-  async redirects() {
-    return [
-      process.env.NEXT_PUBLIC_MAINTENANCE_ACTIVE &&
-      process.env.NODE_ENV === "production"
-        ? {
-            source: "/((?!coming-soon|_next).*)",
-            destination: "/coming-soon",
-            permanent: false,
-          }
-        : {
-            source: "/tetetetetetete",
-            destination: "/teteteyeteyet",
-            permanent: false,
-          },
-    ];
-  },
 };
