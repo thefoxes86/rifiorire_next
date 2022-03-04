@@ -28,7 +28,9 @@ const GQL_RIFIORIRECASA = gql`
           srcSet
         }
         singleLinkSection1
+        singleLinkText1
         singleLinkSection2
+        singleLinkText2
         singleTextSection1
         singleTextSection2
         singleTitleSection1
@@ -155,7 +157,7 @@ const FIRST_CATEGORY_HOME = gql`
 const GQL_RIFIOMENU = gql`
   query MyQuery {
     menu(idType: NAME, id: "primary") {
-      menuItems(where: { location: PRIMARY }) {
+      menuItems(where: { location: PRIMARY }, first: 100) {
         nodes {
           id
           path

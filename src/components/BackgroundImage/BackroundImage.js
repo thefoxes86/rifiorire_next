@@ -4,7 +4,7 @@ import Link from "next/link";
 const BackroundImage = ({ img, title = null, text = null, link = null }) => {
   return (
     <div
-      className=" relative w-100 h-96 my-20 flex items-center justify-center flex-col bg-cover"
+      className=" relative w-100 h-96 my-20 flex items-center justify-center flex-col bg-cover bg-center"
       style={{ backgroundImage: `url(${img})` }}
     >
       {title && (

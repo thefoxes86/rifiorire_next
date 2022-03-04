@@ -25,7 +25,6 @@ export default function Product(props) {
   }
 
   const handleActiveImage = (e) => {
-    console.log("Event", e.target.src);
     setActiveImage({
       src: e.target.src,
       srcSet: e.target.srcSet,
@@ -85,7 +84,7 @@ export default function Product(props) {
 
             <div className="product-info ml-8 col-span-4">
               <h4 className=" products-main-title text-3xl uppercase text-left">
-                {product.name}
+                {product?.name}
               </h4>
               <br />
               <div className="flex w-100 border-b border-black"></div>
@@ -114,42 +113,33 @@ export default function Product(props) {
                   triggerClassName=" text-lg uppercase"
                   triggerOpenedClassName="text-lg uppercase"
                 >
-                  <p>
-                    This is the collapsible content. It can be any element or
-                    React component you like.
-                  </p>
-                  <p>
-                    It can even be another Collapsible component. Check out the
-                    next section!
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: product?.productsDetail?.dettagliProdotto,
+                    }}
+                  ></div>
                 </Collapsible>
                 <Collapsible
                   trigger="MATERIALI"
                   triggerClassName=" text-lg uppercase"
                   triggerOpenedClassName="text-lg uppercase"
                 >
-                  <p>
-                    This is the collapsible content. It can be any element or
-                    React component you like.
-                  </p>
-                  <p>
-                    It can even be another Collapsible component. Check out the
-                    next section!
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: product?.productsDetail?.materiali,
+                    }}
+                  ></div>
                 </Collapsible>
                 <Collapsible
                   trigger="DETTAGLI SPEDIZIONE"
                   triggerClassName=" text-lg uppercase"
                   triggerOpenedClassName="text-lg uppercase"
                 >
-                  <p>
-                    This is the collapsible content. It can be any element or
-                    React component you like.
-                  </p>
-                  <p>
-                    It can even be another Collapsible component. Check out the
-                    next section!
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: product?.productsDetail?.dettagliSpedizione,
+                    }}
+                  ></div>
                 </Collapsible>
               </div>
             </div>

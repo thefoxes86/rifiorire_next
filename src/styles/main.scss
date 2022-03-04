@@ -121,7 +121,45 @@ body {
   width: 50%;
 }
 
+.font-thin {
+  font-weight: 300 !important;
+}
 
+
+table {
+  table-layout: fixed;
+  margin: 20px 0;
+  width: 100%;
+  border-collapse: collapse;
+  
+}
+
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 35%;
+}
+
+th, td {
+  padding: 20px;
+}
+
+td {
+  border: 1px solid black;
+}
+.has-text-align-center {
+  text-align: center
+}
 
 // NProgress style.
 // @import 'nprogress/nprogress.css';

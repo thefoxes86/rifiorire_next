@@ -22,7 +22,7 @@ const Product = (props) => {
         <Link href={`/product/${product?.slug}`}>
           <a className="w-auto h-auto overflow-hidden relative">
             <Image
-              className="object-contain transform hover:scale-110 duration-500 ease-in-out"
+              className="object-contain transform hover:scale-110 duration-500 ease-in-out bg-center"
               width="500"
               height="500"
               loading="lazy"

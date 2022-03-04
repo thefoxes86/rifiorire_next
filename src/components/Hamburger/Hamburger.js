@@ -9,12 +9,20 @@ const Hamburger = ({ items }) => {
     to: [
       {
         opacity: isExpanded ? 0.9 : 0,
-        top: isExpanded ? "132px" : "-180px",
+        top: isExpanded
+          ? window.innerWidth >= 768
+            ? "132px"
+            : "152px"
+          : "-180px",
       },
     ],
     from: {
       opacity: isExpanded ? 0.9 : 0,
-      top: isExpanded ? "132px" : "-180px",
+      top: isExpanded
+        ? window.innerWidth >= 768
+          ? "132px"
+          : "152px"
+        : "-180px",
     },
   });
 
@@ -50,8 +58,6 @@ const Hamburger = ({ items }) => {
     items &&
       items.forEach((el, index) => {
         let item = items.find((data) => data.id === el.parentId);
-
-        // item ? setMenu(...menu, item) : setMenu(...menu, el);
       });
   }, [items]);
 
@@ -104,18 +110,25 @@ const Hamburger = ({ items }) => {
           id="mobile-menu"
           className="absolute right-0 z-10 w-full text-center text-black bg-white"
         >
-          <div class="grid grid-cols-6 gap-4">
+          <div class="grid md:grid-cols-4 grid-cols-2 gap-4">
             {items &&
               items.map(({ id, label, parentId, path }) => (
                 <>
                   {parentId === null && (
-                    <div className="pt-20 pl-28 p-5 flex flex-col justify-start items-start">
+                    <div className="pt-20 md:pl-28 p-5 flex flex-col justify-start items-start">
                       <h3 className="font-bold mb-5">{label}</h3>
                       {items.map((el) => (
                         <>
                           {id === el.parentId && (
                             <Link href={el.path} className="mt-10">
-                              <a className="font-thin">{el.label}</a>
+                              <a
+                                onClick={() =>
+                                  setisExpanded((prevExpanded) => !prevExpanded)
+                                }
+                                className="font-thin text-left"
+                              >
+                                {el.label}
+                              </a>
                             </Link>
                           )}
                         </>

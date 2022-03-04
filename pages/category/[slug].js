@@ -13,13 +13,10 @@ import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import TitleAndText from "../../src/components/TitleAndText";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+const options = [{ value: "chocolate", label: "Da decidere cosa filtrare" }];
 
 export default function CategorySingle(props) {
+  const { categoryName, description, products, categoryId } = props;
   const [value, setValue] = useState();
   const router = useRouter();
 
@@ -33,21 +30,27 @@ export default function CategorySingle(props) {
     return <div>Loading...</div>;
   }
 
-  const { categoryName, products } = props;
-
+  console.log("props", categoryId);
   return (
     <Layout>
       <div className="product-categories-container container mx-auto my-32 px-4 xl:px-0">
-        <TitleAndText title={categoryName} color="black" text="" />
+        {categoryId === 36 ||
+        categoryId === 31 ||
+        categoryId === 34 ||
+        categoryId === 35 ? (
+          <TitleAndText title={categoryName} color="black" text={description} />
+        ) : (
+          ""
+        )}
         <div className="container mx-auto my-10 w-100 flex flex-col items-start justify-center">
-          <Link href="/categories">
+          {/* <Link href="/categories">
             <a>
               <h3 className="color-primary text-lg font-thin">
                 tutte le categorie
               </h3>
             </a>
-          </Link>
-          <MultiSelect onChange={handleOnchange} options={options} />
+          </Link> */}
+          {/* <MultiSelect onChange={handleOnchange} options={options} /> */}
         </div>
         <div className="product-categories grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
           {undefined !== products && products?.length
@@ -73,7 +76,9 @@ export async function getStaticProps(context) {
 
   return {
     props: {
+      categoryId: data?.productCategory?.databaseId ?? "",
       categoryName: data?.productCategory?.name ?? "",
+      description: data?.productCategory?.description ?? "",
       products: data?.productCategory?.products?.nodes ?? [],
     },
     revalidate: 1,

@@ -5,6 +5,8 @@ export const PRODUCT_BY_CATEGORY_SLUG = gql`
     productCategory(id: $slug, idType: SLUG) {
       id
       name
+      databaseId
+      description
       products(first: 50) {
         nodes {
           id
@@ -41,18 +43,18 @@ export const PRODUCT_BY_CATEGORY_SLUG = gql`
             regularPrice
             externalUrl
           }
-          ... on GroupProduct {
-            products {
-              nodes {
-                ... on SimpleProduct {
-                  id
-                  regularPrice
-                  price
-                }
-              }
-            }
-            id
-          }
+          # ... on GroupProduct {
+          #   id
+          #   products {
+          #     nodes {
+          #       ... on SimpleProduct {
+          #         id
+          #         price
+          #         regularPrice
+          #       }
+          #     }
+          #   }
+          # }
         }
       }
     }

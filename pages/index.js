@@ -24,8 +24,8 @@ const Home = ({ page, pagebuilder, menu }) => {
     client.query({
       query: FIRST_CATEGORY_HOME,
       variables: {
-        cat1: pagebuilder.category || "new-arrivals",
-        cat2: pagebuilder.category2 || "new-arrivals",
+        cat1: pagebuilder?.category || "all",
+        cat2: pagebuilder?.category2 || "all",
       },
     });
 
@@ -49,55 +49,59 @@ const Home = ({ page, pagebuilder, menu }) => {
 
         {pagebuilder && (
           <>
-            <Slider slides={pagebuilder.slides} />
+            <Slider slides={pagebuilder?.slides} />
             <TitleAndText
-              title={pagebuilder.singleTitleSection1 || ""}
-              text={pagebuilder.singleTextSection1 || ""}
-              link={pagebuilder.singleLinkSection1 || "#"}
+              title={pagebuilder?.singleTitleSection1 || ""}
+              text={pagebuilder?.singleTextSection1 || ""}
+              link={pagebuilder?.singleLinkSection1 || "#"}
+              textLink={pagebuilder?.singleLinkText1 || ""}
               color="violet"
             />
-            {products.firstCategory && (
+            {products?.firstCategory && (
               <CategoryProductsLeft
-                title={pagebuilder.titleCategory1 || ""}
-                link={`/category/${pagebuilder.category1}` || "#"}
-                img={pagebuilder.imageCategory1 || ""}
-                products={products.firstCategory.nodes}
+                title={pagebuilder?.titleCategory1 || ""}
+                link={`/category/${pagebuilder.category}` || "#"}
+                img={pagebuilder?.imageCategory1 || ""}
+                text={pagebuilder?.textCategory1 || ""}
+                products={products?.firstCategory?.nodes}
               />
             )}
-            {products.secondCategory && (
+            {products?.secondCategory && (
               <CategoryProductsRight
-                title={pagebuilder.titleCategory2 || ""}
+                title={pagebuilder?.titleCategory2 || ""}
                 link={`/category/${pagebuilder.category2}` || "#"}
-                img={pagebuilder.imageCategory2 || ""}
-                products={products.secondCategory.nodes}
+                text={pagebuilder?.textCategory1 || ""}
+                img={pagebuilder?.imageCategory2 || ""}
+                products={products?.secondCategory?.nodes}
               />
             )}
-            <CustomButton
+            {/* <CustomButton
               path="#"
               text="Category"
               withLine={true}
               color="black"
-            />
+            /> */}
 
             <BackroundImage
               img={
-                (pagebuilder.aboutSectionImage.mediaItemUrl &&
-                  pagebuilder.aboutSectionImage.mediaItemUrl) ||
+                (pagebuilder?.aboutSectionImage?.mediaItemUrl &&
+                  pagebuilder?.aboutSectionImage?.mediaItemUrl) ||
                 "images/demo-about-image.png"
               }
-              title={pagebuilder.aboutSectionTitle}
-              text={pagebuilder.aboutSectionText}
-              link="#"
+              title={pagebuilder?.aboutSectionTitle}
+              text={pagebuilder?.aboutSectionText}
+              link="/about-us"
             />
             <TitleAndText
-              title={pagebuilder.singleTitleSection2 || ""}
-              text={pagebuilder.singleTextSection2 || ""}
-              link={pagebuilder.singleLinkSection2 || "#"}
+              title={pagebuilder?.singleTitleSection2 || ""}
+              text={pagebuilder?.singleTextSection2 || ""}
+              link={pagebuilder?.singleLinkSection2 || "#"}
+              textLink={pagebuilder?.singleLinkText2 || ""}
               color="primary"
             />
             <BackroundImage
               img={
-                pagebuilder.imagePreFooterFull.mediaItemUrl ||
+                pagebuilder?.imagePreFooterFull?.mediaItemUrl ||
                 "images/demo-footer-img.png"
               }
             />
@@ -117,8 +121,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      page: data.page,
-      pagebuilder: data.page.pagebuilder,
+      page: data?.page,
+      pagebuilder: data?.page?.pagebuilder,
       loading,
       networkStatus,
     },

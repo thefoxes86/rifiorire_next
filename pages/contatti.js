@@ -4,6 +4,7 @@ import TitleAndText from "../src/components/TitleAndText";
 import Helmet from "helmet";
 import Layout from "../src/components/Layout";
 import ContactForm from "../src/components/ContactForm";
+import AddressMap from "../src/components/AddressMap/AddressMap";
 
 const Contatti = ({ page, menu }) => {
   return (
@@ -22,11 +23,14 @@ const Contatti = ({ page, menu }) => {
         <TitleAndText
           title={"Scrivici per maggiori dettagli"}
           text={
-            "Una collezione pensata per……. Harumquo doluptae doluptas doluptatur re exeratiatus, que corio berum des doluptia quatur, officid ucimolorum doluptatqui dolenihil milles cus as incto offic to et aceri sequia volupta et abore sequo."
+            "Contattaci senza impegno. Se ci racconti quali sono le tue esigenze, saremo lieti di risponderti via e-mail entro 24 ore. Se preferisci parlarci a voce, diccelo senza problemi e ti telefoneremo!"
           }
           color="violet"
         />
         <ContactForm />
+        <div className="mt-10 w-screen h-72 overflow-hidden">
+          {/* <AddressMap /> */}
+        </div>
       </Layout>
     </>
   );

@@ -33,7 +33,7 @@ const Slider = ({ slides }) => {
           ></div>
 
           <div
-            className="col-span-1 h-96 md:col-span-3 md:h-full bg-cover flex items-end justify-center"
+            className="col-span-1 h-96 md:col-span-3 md:h-full bg-cover flex items-end justify-center bg-center"
             style={{ backgroundImage: `url(${slides[0].image.mediaItemUrl})` }}
           >
             <CustomButton
@@ -58,7 +58,7 @@ const Slider = ({ slides }) => {
             </div>
           </div>
           <div
-            className="col-span-1 h-96 md:col-span-2 md:h-full bg-cover flex items-end justify-center"
+            className="col-span-1 h-96 md:col-span-2 md:h-full bg-cover flex items-end justify-center bg-center"
             style={{ backgroundImage: `url(${slides[1].image.mediaItemUrl})` }}
           >
             <CustomButton
@@ -68,7 +68,7 @@ const Slider = ({ slides }) => {
             />
           </div>
           <div
-            className="col-span-1 h-96 md:col-span-2 md:h-full bg-cover flex items-end justify-center"
+            className="col-span-1 h-96 md:col-span-2 md:h-full bg-cover flex items-end justify-center bg-center"
             style={{ backgroundImage: `url(${slides[2].image.mediaItemUrl})` }}
           >
             <CustomButton

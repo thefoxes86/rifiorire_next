@@ -315,11 +315,11 @@ const CheckoutForm = ({ countriesData }) => {
               <YourOrder cart={cart} />
 
               {/* {Shipping Method} */}
-              <ShippingMethods
+              {/* <ShippingMethods
                 input={input}
                 handleOnChange={handleOnChange}
                 shipMethods={data && data.cart.availableShippingMethods[0]}
-              />
+              /> */}
 
               {/*Payment*/}
               <PaymentModes input={input} handleOnChange={handleOnChange} />

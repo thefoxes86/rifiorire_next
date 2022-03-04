@@ -40,11 +40,11 @@ const PaymentModes = ({ input, handleOnChange }) => {
         <label className="form-check-label">
           <input
             onChange={handleOnChange}
-            value="payway"
+            value="paywaynetrecurring"
             className="form-check-input mr-3"
             name="paymentMethod"
             type="radio"
-            checked={"payway" === paymentMethod}
+            checked={"paywaynetrecurring" === paymentMethod}
           />
           <span className="woo-next-payment-content">Carta di Credito</span>
         </label>

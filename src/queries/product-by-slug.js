@@ -23,6 +23,11 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
         srcSet
         sourceUrl
       }
+      productsdetail {
+        dettagliProdotto
+        materiali
+        dettagliSpedizione
+      }
       name
       ... on SimpleProduct {
         price
@@ -41,6 +46,7 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
         externalUrl
       }
       ... on GroupProduct {
+        id
         products {
           nodes {
             ... on SimpleProduct {
@@ -50,7 +56,6 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
             }
           }
         }
-        id
       }
     }
   }
