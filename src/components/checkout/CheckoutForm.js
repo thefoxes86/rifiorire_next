@@ -88,6 +88,7 @@ const CheckoutForm = ({ countriesData }) => {
   const { data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
+      console.log("CART", data);
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem("woo-next-cart", JSON.stringify(updatedCart));

@@ -7,7 +7,7 @@ import {
   PRODUCT_SLUGS,
 } from "../../src/queries/product-by-slug";
 import { isEmpty } from "lodash";
-import GalleryCarousel from "../../src/components/single-product/gallery-carousel";
+
 import Price from "../../src/components/single-product/price";
 import Collapsible from "react-collapsible";
 import { useEffect, useState } from "react";
@@ -29,6 +29,25 @@ export default function Product(props) {
       src: e.target.src,
       srcSet: e.target.srcSet,
     });
+  };
+
+  const renderCollapsible = (text) => {
+    setTimeout(() => {
+      console.log(text);
+      return (
+        <Collapsible
+          trigger="DETTAGLI PRODOTTO"
+          triggerClassName=" text-lg uppercase"
+          triggerOpenedClassName="text-lg uppercase"
+        >
+          <div
+            dangerouslySetInnerHTML={{
+              __html: text,
+            }}
+          ></div>
+        </Collapsible>
+      );
+    }, 2000);
   };
 
   useEffect(() => {
@@ -88,7 +107,9 @@ export default function Product(props) {
               </h4>
               <br />
               <div className="flex w-100 border-b border-black"></div>
-              <p className=" text-lg uppercase">CODE</p>
+              {product?.sku && (
+                <p className=" text-lg uppercase">CODE: {product?.sku}</p>
+              )}
 
               <p className="pt-1 mt-4 text-xl text-gray-900">
                 <Price
@@ -115,7 +136,7 @@ export default function Product(props) {
                 >
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: product?.productsDetail?.dettagliProdotto,
+                      __html: product?.productsdetail?.dettagliProdotto,
                     }}
                   ></div>
                 </Collapsible>
@@ -126,7 +147,7 @@ export default function Product(props) {
                 >
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: product?.productsDetail?.materiali,
+                      __html: product?.productsdetail?.materiali,
                     }}
                   ></div>
                 </Collapsible>
@@ -137,7 +158,7 @@ export default function Product(props) {
                 >
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: product?.productsDetail?.dettagliSpedizione,
+                      __html: product?.productsdetail?.dettagliSpedizione,
                     }}
                   ></div>
                 </Collapsible>

@@ -67,6 +67,7 @@ export const PRODUCT_SLUGS = gql`
       nodes {
         id
         slug
+        sku
       }
     }
   }
