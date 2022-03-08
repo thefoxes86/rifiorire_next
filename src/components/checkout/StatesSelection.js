@@ -51,7 +51,7 @@ const StateSelection = ({
   return (
     <div className="mb-3">
       <label className="leading-7 text-sm text-gray-600" htmlFor={inputId}>
-        State/County
+        Provincia
         <Abbr required />
       </label>
       <div className="relative w-full border-none">
@@ -66,7 +66,7 @@ const StateSelection = ({
           )}
           id={inputId}
         >
-          <option value="">Select a state...</option>
+          <option value="">Seleziona una provincia</option>
           {states.map((state, index) => (
             <option
               key={state?.stateCode ?? index}

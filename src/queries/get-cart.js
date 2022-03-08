@@ -33,6 +33,10 @@ const GET_CART = gql`
                   title
                 }
               }
+              ... on SimpleProduct {
+                id
+                price
+              }
             }
           }
           variation {

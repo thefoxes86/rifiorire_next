@@ -6,7 +6,7 @@ import Layout from "../src/components/Layout";
 
 import GenericPageContent from "../src/components/GenericPageContent";
 
-const Gioielli = ({ page, menu }) => {
+const CuraDelGioiello = ({ page, menu }) => {
   return (
     <>
       <Layout menu={menu}>
@@ -26,7 +26,7 @@ const Gioielli = ({ page, menu }) => {
   );
 };
 
-export default Gioielli;
+export default CuraDelGioiello;
 
 export async function getStaticProps() {
   const { data, loading, networkStatus } = await client.query({

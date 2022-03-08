@@ -24,8 +24,6 @@ const Footer = ({ menu }) => {
           <FooterLink
             title="INFO"
             list={[
-              { name: "MATERIALI", link: "/materiali" },
-              { name: "GUIDA DELLE TAGLIE", link: "/guida-alle-taglie" },
               { name: "RESI", link: "/reso" },
               { name: "CONDIZIONI DI VENDITA", link: "/condizioni-generali" },
               { name: "PRIVACY POLICY", link: "/privacy-policy" },
@@ -38,7 +36,6 @@ const Footer = ({ menu }) => {
             list={[
               { name: "CONTATTI", link: "/contatti" },
               { name: "ABOUT US", link: "/about-us" },
-              { name: "IL NEGOZIO", link: "#" },
             ]}
           />
         </div>

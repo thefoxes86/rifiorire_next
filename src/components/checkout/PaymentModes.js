@@ -36,7 +36,7 @@ const PaymentModes = ({ input, handleOnChange }) => {
         </label>
       </div>
       {/*Check Payments*/}
-      <div className="form-check woo-next-payment-input-container mt-2">
+      {/* <div className="form-check woo-next-payment-input-container mt-2">
         <label className="form-check-label">
           <input
             onChange={handleOnChange}
@@ -48,7 +48,7 @@ const PaymentModes = ({ input, handleOnChange }) => {
           />
           <span className="woo-next-payment-content">Carta di Credito</span>
         </label>
-      </div>
+      </div> */}
       {/*Pay with Stripe*/}
       {/* <div className="form-check woo-next-payment-input-container mt-2">
         <label className="form-check-label">
@@ -104,8 +104,7 @@ const PaymentModes = ({ input, handleOnChange }) => {
       </div> */}
       {/*	Payment Instructions*/}
       <div className="woo-next-checkout-payment-instructions mt-2">
-        Please send a check to Store Name, Store Street, Store Town, Store State
-        / County, Store Postcode.
+        Inserisci tutti i tuoi dati di spedizone e di fatturazione.
       </div>
     </div>
   );

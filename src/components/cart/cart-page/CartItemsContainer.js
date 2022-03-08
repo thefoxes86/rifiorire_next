@@ -125,7 +125,7 @@ const CartItemsContainer = () => {
                 onClick={(event) => handleClearCart(event)}
                 disabled={clearCartProcessing}
               >
-                <span className="woo-next-cart">Clear Cart</span>
+                <span className="woo-next-cart">Svuota Carrello</span>
                 <i className="fa fa-arrow-alt-right" />
               </button>
               {clearCartProcessing ? <p>Clearing...</p> : ""}
@@ -139,16 +139,16 @@ const CartItemsContainer = () => {
                   <th className="woo-next-cart-heading-el" scope="col" />
                   <th className="woo-next-cart-heading-el" scope="col" />
                   <th className="woo-next-cart-heading-el" scope="col">
-                    Product
+                    Prodotti
                   </th>
                   <th className="woo-next-cart-heading-el" scope="col">
-                    Price
+                    Prezzo
                   </th>
                   <th className="woo-next-cart-heading-el" scope="col">
-                    Quantity
+                    Quantità
                   </th>
                   <th className="woo-next-cart-heading-el" scope="col">
-                    Total
+                    Totale
                   </th>
                 </tr>
               </thead>
@@ -175,7 +175,7 @@ const CartItemsContainer = () => {
                   <tbody>
                     <tr className="table-light flex flex-col">
                       <td className="woo-next-cart-element-total text-2xl font-normal">
-                        Subtotal
+                        Totale
                       </td>
                       <td className="woo-next-cart-element-amt text-2xl font-bold">
                         {"string" !== typeof cart.totalProductsPrice
@@ -192,7 +192,7 @@ const CartItemsContainer = () => {
                 <Link href="/checkout">
                   <button className="bg-secondary text-white px-5 py-3 rounded-sm w-auto xl:w-full">
                     <span className="woo-next-cart-checkout-txt">
-                      Proceed to Checkout
+                      Procedi al Checkout
                     </span>
                     <i className="fas fa-long-arrow-alt-right" />
                   </button>
@@ -213,11 +213,11 @@ const CartItemsContainer = () => {
         </div>
       ) : (
         <div className="container mx-auto my-32 px-4 xl:px-0">
-          <h2 className="text-2xl mb-5">No items in the cart</h2>
+          <h2 className="text-2xl mb-5">Non ci sono prodotti nel carrello</h2>
           <Link href="/">
             <button className="bg-primary text-white px-5 py-3 rounded-sm">
               <span className="woo-next-cart-checkout-txt">
-                Add New Products
+                Aggiungi nuovo prodotto
               </span>
               <i className="fas fa-long-arrow-alt-right" />
             </button>

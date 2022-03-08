@@ -12,26 +12,40 @@ const YourOrder = ({ cart }) => {
               <tr className="woo-next-cart-head-container text-left">
                 <th className="woo-next-cart-heading-el" scope="col" />
                 <th className="woo-next-cart-heading-el" scope="col">
-                  Product
+                  Prodotti
                 </th>
                 <th className="woo-next-cart-heading-el" scope="col">
-                  Total
+                  Totale
                 </th>
               </tr>
             </thead>
             <tbody>
-              {cart.products.length &&
-                cart.products.map((item) => (
-                  <CheckoutCartItem key={item.productId} item={item} />
+              {cart.contents.nodes.length &&
+                cart.contents.nodes.map((item) => (
+                  <CheckoutCartItem
+                    key={item.productId}
+                    item={item.product.node}
+                  />
                 ))}
               {/*Total*/}
+
               <tr className="bg-gray-200">
                 <td className="" />
                 <td className="woo-next-checkout-total font-normal text-xl">
-                  Total
+                  Costo di spedizione
                 </td>
                 <td className="woo-next-checkout-total font-bold text-xl">
-                  {cart.totalProductsPrice}
+                  {cart.shippingTotal}
+                </td>
+              </tr>
+              <tr className="bg-gray-200">
+                <td className="" />
+
+                <td className="woo-next-checkout-total font-normal text-xl">
+                  Totale
+                </td>
+                <td className="woo-next-checkout-total font-bold text-xl">
+                  {cart.total}
                 </td>
               </tr>
               {/* <tr className="">

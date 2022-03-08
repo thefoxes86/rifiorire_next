@@ -14,6 +14,7 @@ import Address from "./Address";
 import {
   handleBillingDifferentThanShipping,
   handleCreateAccount,
+  handleExtraShippingCost,
   handleStripeCheckout,
   setStatesForCountry,
 } from "../../utils/checkout";
@@ -71,7 +72,7 @@ const CheckoutForm = ({ countriesData }) => {
     shippingMethod: "",
   };
 
-  const [cart, setCart] = useContext(AppContext);
+  const [cart, setCart] = useState();
   const [input, setInput] = useState(initialState);
   const [orderData, setOrderData] = useState(null);
   const [requestError, setRequestError] = useState(null);
@@ -83,18 +84,19 @@ const CheckoutForm = ({ countriesData }) => {
   const [isFetchingBillingStates, setIsFetchingBillingStates] = useState(false);
   const [isStripeOrderProcessing, setIsStripeOrderProcessing] = useState(false);
   const [createdOrderData, setCreatedOrderData] = useState({});
+  const [shippingMethod, setShippingMethod] = useState(null);
+  const [paymentMethod, setPaymentmethod] = useState(null);
 
   // Get Cart Data.
   const { data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
-      console.log("CART", data);
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem("woo-next-cart", JSON.stringify(updatedCart));
 
       // Update cart data in React Context.
-      setCart(updatedCart);
+      setCart(data.cart);
     },
   });
 
@@ -195,6 +197,7 @@ const CheckoutForm = ({ countriesData }) => {
    *
    * @return {void}
    */
+
   const handleOnChange = async (
     event,
     isShipping = false,
@@ -202,13 +205,60 @@ const CheckoutForm = ({ countriesData }) => {
   ) => {
     const { target } = event || {};
 
-    // updateShippingMethod({
-    //   variables: {
-    //     input: {
-    //       shippingMethods: ["standard"],
-    //     },
-    //   },
-    // });
+    // flat_rate:1  6,00 €
+    // local_pickup:4 Free
+    // flat_rate:6 9,00 €
+    if ("shippingMethod" === target.name) {
+      setShippingMethod(target.value);
+      updateShippingMethod({
+        variables: {
+          input: {
+            shippingMethods: target.value,
+          },
+        },
+        onCompleted: () => {
+          refetch();
+        },
+      });
+    }
+
+    if ("paymentMethod" === target.name) {
+      setPaymentmethod(target.value);
+    }
+
+    if ("state" === target.name) {
+      (async () => {
+        const res = await handleExtraShippingCost(target.value);
+        console.log("Response", shippingMethod);
+        res === true
+          ? shippingMethod !== "local_pickup:4"
+            ? updateShippingMethod({
+                variables: {
+                  input: {
+                    shippingMethods: "flat_rate:6",
+                  },
+                },
+                onCompleted: () => {
+                  refetch();
+                  setShippingMethod("flat_rate:6");
+                },
+              })
+            : ""
+          : shippingMethod !== "local_pickup:4"
+          ? updateShippingMethod({
+              variables: {
+                input: {
+                  shippingMethods: "flat_rate:1",
+                },
+              },
+              onCompleted: () => {
+                refetch();
+                setShippingMethod("flat_rate:1");
+              },
+            })
+          : "";
+      })();
+    }
 
     if ("createAccount" === target.name) {
       handleCreateAccount(input, setInput, target);
@@ -270,7 +320,9 @@ const CheckoutForm = ({ countriesData }) => {
             <div>
               {/*Shipping Details*/}
               <div className="billing-details">
-                <h2 className="text-xl font-medium mb-4">Shipping Details</h2>
+                <h2 className="text-xl font-medium mb-4">
+                  Indirizzo di spedizione
+                </h2>
                 <Address
                   states={theShippingStates}
                   countries={shippingCountries}
@@ -312,29 +364,33 @@ const CheckoutForm = ({ countriesData }) => {
             {/* Order & Payments*/}
             <div className="your-orders">
               {/*	Order*/}
-              <h2 className="text-xl font-medium mb-4">Your Order</h2>
+              <h2 className="text-xl font-medium mb-4">Il tuo ordine</h2>
               <YourOrder cart={cart} />
 
-              {/* {Shipping Method} */}
-              {/* <ShippingMethods
+              <ShippingMethods
                 input={input}
                 handleOnChange={handleOnChange}
-                shipMethods={data && data.cart.availableShippingMethods[0]}
-              /> */}
+                shipMethods={cart.availableShippingMethods[0]}
+              />
 
               {/*Payment*/}
               <PaymentModes input={input} handleOnChange={handleOnChange} />
 
               <div className="woo-next-place-order-btn-wrap mt-5">
                 <button
-                  disabled={isOrderProcessing}
+                  disabled={
+                    isOrderProcessing || (!shippingMethod && !paymentMethod)
+                      ? true
+                      : false
+                  }
                   className={cx(
                     "bg-secondary text-white px-5 py-3 rounded-sm w-auto xl:w-full",
-                    { "opacity-50": isOrderProcessing }
+                    { "opacity-50": isOrderProcessing },
+                    { "opacity-50": !shippingMethod && !paymentMethod }
                   )}
                   type="submit"
                 >
-                  Place Order
+                  Ordina adesso
                 </button>
               </div>
 

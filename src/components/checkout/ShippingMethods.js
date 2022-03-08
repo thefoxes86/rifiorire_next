@@ -12,13 +12,13 @@ const ShippingMethods = ({ shipMethods, handleOnChange, input }) => {
           <label className="form-check-label">
             <input
               onChange={handleOnChange}
-              value="standard"
+              value="flat_rate:1"
               className="form-check-input mr-3"
               name="shippingMethod"
               type="radio"
-              checked={"standard" === shippingMethod}
+              checked={"flat_rate:1" === shippingMethod}
             />
-            <span className="woo-next-payment-content">Standard 6,00 €</span>
+            <span className="woo-next-payment-content">Standard</span>
           </label>
         </div>
         {/*Pay with Paypal*/}
@@ -26,11 +26,11 @@ const ShippingMethods = ({ shipMethods, handleOnChange, input }) => {
           <label className="form-check-label">
             <input
               onChange={handleOnChange}
-              value="pickup"
+              value="local_pickup:4"
               className="form-check-input mr-3"
               name="shippingMethod"
               type="radio"
-              checked={"pickup" === shippingMethod}
+              checked={"local_pickup:4" === shippingMethod}
             />
             <span className="woo-next-payment-content">Ritiro in negozio</span>
           </label>
