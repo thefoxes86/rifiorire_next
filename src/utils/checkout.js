@@ -193,6 +193,17 @@ const provinceExtraCost = [
   "Ragusa",
   "Siracusa",
   "Trapani",
+  "Cagliari",
+  "Nuoro",
+  "Oristano",
+  "Sassari",
+  "Sud Sardegna",
+  "Catanzaro",
+  "Cosenza",
+  "Crotone",
+  "Crotone",
+  "Reggio Calabria",
+  "Vibo Valentia",
 ];
 
 export const handleExtraShippingCost = (value) => {

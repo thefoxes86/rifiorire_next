@@ -4,16 +4,22 @@ import { AppContext } from "../../context/AppContext";
 import { getFormattedCart, getUpdatedItems } from "../../../functions";
 import CartItem from "./CartItem";
 import { v4 } from "uuid";
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import UPDATE_CART from "../../../mutations/update-cart";
 import GET_CART from "../../../queries/get-cart";
 import CLEAR_CART_MUTATION from "../../../mutations/clear-cart";
 import { isEmpty } from "lodash";
+import { GET_COUPONS } from "../../../queries/GQL_RIFIORIRE";
 
 const CartItemsContainer = () => {
   // @TODO wil use it in future variations of the project.
   const [cart, setCart] = useContext(AppContext);
   const [requestError, setRequestError] = useState(null);
+
+  const [
+    fetchCoupons,
+    { dataCoupons, loadingCoupons, errorCoupons },
+  ] = useLazyQuery(GET_COUPONS);
 
   // Get Cart Data.
   const { loading, error, data, refetch } = useQuery(GET_CART, {
@@ -22,6 +28,8 @@ const CartItemsContainer = () => {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem("woo-next-cart", JSON.stringify(updatedCart));
+
+      fetchCoupons();
 
       // Update cart data in React Context.
       setCart(updatedCart);

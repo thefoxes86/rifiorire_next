@@ -68,7 +68,7 @@ const CheckoutForm = ({ countriesData }) => {
     createAccount: false,
     orderNotes: "",
     billingDifferentThanShipping: false,
-    paymentMethod: "cod",
+    paymentMethod: "",
     shippingMethod: "",
   };
 
@@ -120,6 +120,8 @@ const CheckoutForm = ({ countriesData }) => {
     { data: shipping, loading, error },
   ] = useMutation(UPDATE_SHIPPING_METHODS, {
     onCompleted: () => {
+      console.log("here");
+      if (shippingMethod === null) setShippingMethod("flat_rate:1");
       refetch();
     },
   });
@@ -216,9 +218,6 @@ const CheckoutForm = ({ countriesData }) => {
             shippingMethods: target.value,
           },
         },
-        onCompleted: () => {
-          refetch();
-        },
       });
     }
 
@@ -238,10 +237,6 @@ const CheckoutForm = ({ countriesData }) => {
                     shippingMethods: "flat_rate:6",
                   },
                 },
-                onCompleted: () => {
-                  refetch();
-                  setShippingMethod("flat_rate:6");
-                },
               })
             : ""
           : shippingMethod !== "local_pickup:4"
@@ -250,10 +245,6 @@ const CheckoutForm = ({ countriesData }) => {
                 input: {
                   shippingMethods: "flat_rate:1",
                 },
-              },
-              onCompleted: () => {
-                refetch();
-                setShippingMethod("flat_rate:1");
               },
             })
           : "";
@@ -303,11 +294,18 @@ const CheckoutForm = ({ countriesData }) => {
   };
 
   useEffect(async () => {
+    updateShippingMethod({
+      variables: {
+        input: {
+          shippingMethods: "flat_rate:1",
+        },
+      },
+    });
     if (null !== orderData) {
       // Call the checkout mutation when the value for orderData changes/updates.
       await checkout();
     }
-  }, [orderData]);
+  }, [, orderData]);
 
   // Loading state
   const isOrderProcessing = checkoutLoading || isStripeOrderProcessing;
@@ -335,11 +333,22 @@ const CheckoutForm = ({ countriesData }) => {
               </div>
               <div>
                 <CheckboxField
+                  name="condizioniGenerali"
+                  type="checkbox"
+                  checked={input?.condizioniGenerali}
+                  handleOnChange={handleOnChange}
+                  required={true}
+                  label="Condizioni Generali di Vendita"
+                  containerClassNames="mb-4 pt-4"
+                />
+              </div>
+              <div>
+                <CheckboxField
                   name="billingDifferentThanShipping"
                   type="checkbox"
                   checked={input?.billingDifferentThanShipping}
                   handleOnChange={handleOnChange}
-                  label="Billing different than shipping"
+                  label="Spedisci ad un indirizzo differente"
                   containerClassNames="mb-4 pt-4"
                 />
               </div>
@@ -370,6 +379,7 @@ const CheckoutForm = ({ countriesData }) => {
               <ShippingMethods
                 input={input}
                 handleOnChange={handleOnChange}
+                shippingMethodSelected={shippingMethod}
                 shipMethods={cart.availableShippingMethods[0]}
               />
 
@@ -379,14 +389,13 @@ const CheckoutForm = ({ countriesData }) => {
               <div className="woo-next-place-order-btn-wrap mt-5">
                 <button
                   disabled={
-                    isOrderProcessing || (!shippingMethod && !paymentMethod)
-                      ? true
-                      : false
+                    isOrderProcessing || paymentMethod !== null ? true : false
                   }
                   className={cx(
                     "bg-secondary text-white px-5 py-3 rounded-sm w-auto xl:w-full",
                     { "opacity-50": isOrderProcessing },
-                    { "opacity-50": !shippingMethod && !paymentMethod }
+                    { "opacity-50": !shippingMethod },
+                    { "opacity-50": !paymentMethod }
                   )}
                   type="submit"
                 >
@@ -395,9 +404,9 @@ const CheckoutForm = ({ countriesData }) => {
               </div>
 
               {/* Checkout Loading*/}
-              {isOrderProcessing && <p>Processing Order...</p>}
+              {isOrderProcessing && <p>Stiamo processando il tuo ordine...</p>}
               {requestError && (
-                <p>Error : {requestError} :( Please try again</p>
+                <p>Errore : {requestError} :( Prova nuovamente</p>
               )}
             </div>
           </div>

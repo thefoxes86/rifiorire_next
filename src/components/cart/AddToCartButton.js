@@ -86,14 +86,14 @@ const AddToCart = (props) => {
               { "opacity-50 cursor-not-allowed": addToCartLoading }
             )}
           >
-            {addToCartLoading ? "Adding to cart..." : "Add to cart"}
+            {addToCartLoading ? "Sto aggiungendo..." : "Aggiungi al carrello"}
           </button>
         </div>
       )}
       {showViewCart ? (
         <Link href="/cart">
           <button className="px-20 mt-5 py-3 uppercase font-thin bg-black text-white hover:bg-secondary hover:text-white">
-            View Cart
+            Vai al carrello
           </button>
         </Link>
       ) : (

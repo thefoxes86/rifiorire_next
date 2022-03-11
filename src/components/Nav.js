@@ -14,7 +14,7 @@ const Nav = ({ menu }) => {
     <header>
       <nav
         id="header"
-        className="fixed top-0 z-50 w-full md:py-1 py-3 bg-white "
+        className="fixed top-0 z-50 w-full md:py-1 py-3 bg-white"
       >
         <div className="container flex flex-wrap items-center justify-between px-6 mx-auto mt-0">
           <div className="order-2 md:order-1 flex items-center">

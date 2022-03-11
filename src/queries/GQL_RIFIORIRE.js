@@ -199,6 +199,38 @@ const GQL_RIFIORIREGENERICPAGE = gql`
   }
 `;
 
+const GET_COUPONS = gql`
+  query getCoupons {
+    coupons {
+      nodes {
+        amount
+        code
+        databaseId
+        dateExpiry
+        description
+        discountType
+        maximumAmount
+        freeShipping
+        minimumAmount
+        products {
+          nodes {
+            id
+            databaseId
+            name
+          }
+        }
+        individualUse
+        emailRestrictions
+        limitUsageToXItems
+        date
+        usageLimitPerUser
+        usageLimit
+        usageCount
+      }
+    }
+  }
+`;
+
 export {
   GQL_RIFIOMENU,
   GQL_RIFIORIRECASA,
@@ -206,4 +238,5 @@ export {
   GQL_RIFIORIRECHISIAMO,
   GQL_RIFIORIRECONTATTI,
   GQL_RIFIORIREGENERICPAGE,
+  GET_COUPONS,
 };

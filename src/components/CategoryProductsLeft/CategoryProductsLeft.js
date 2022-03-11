@@ -12,7 +12,12 @@ const CategoryProductsLeft = ({ title, img, link, products, text }) => {
           <div className="md:col-span-7 col-span-6 h-96 bg-primary relative flex flex-col justify-center items-center overflow-x-visible mb-20">
             <Link href={link || "#"}>
               <a>
-                <h3 className="text-white text-6xl absolute font-thin tracking-wide mb-5 z-10 md:pl-30">
+                <h3
+                  className="text-white text-6xl absolute font-thin tracking-wide mb-5 z-10 md:pl-30"
+                  data-scroll
+                  data-scroll-speed="1"
+                  data-scroll-offset={[-400, 0]}
+                >
                   {title}
                 </h3>
                 <ArrayCategory />
@@ -22,6 +27,9 @@ const CategoryProductsLeft = ({ title, img, link, products, text }) => {
               className="w-2/4 bottom-10 z-0 md:w-2/5 md:left-2/3 md:absolute md:bottom-10 bg-center"
               src={img.link || "./images/img-category.png"}
               srcSet={img.srcSet}
+              data-scroll
+              data-scroll-speed="2"
+              data-scroll-offset={[-300, 0]}
             />
           </div>
           <div className="md:col-span-1 hidden"></div>

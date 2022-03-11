@@ -42,6 +42,16 @@ const YourOrder = ({ cart }) => {
                 <td className="" />
 
                 <td className="woo-next-checkout-total font-normal text-xl">
+                  Totale senza Iva
+                </td>
+                <td className="woo-next-checkout-total font-bold text-xl">
+                  {cart.total}
+                </td>
+              </tr>
+              <tr className="bg-gray-200">
+                <td className="" />
+
+                <td className="woo-next-checkout-total font-normal text-xl">
                   Totale
                 </td>
                 <td className="woo-next-checkout-total font-bold text-xl">
