@@ -91,7 +91,7 @@ const AddToCart = (props) => {
         </div>
       )}
       {showViewCart ? (
-        <Link href="/cart">
+        <Link href="/checkout">
           <button className="px-20 mt-5 py-3 uppercase font-thin bg-black text-white hover:bg-secondary hover:text-white">
             Vai al carrello
           </button>

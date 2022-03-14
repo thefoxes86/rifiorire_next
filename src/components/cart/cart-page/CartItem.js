@@ -12,6 +12,8 @@ const CartItem = ({
 }) => {
   const [productCount, setProductCount] = useState(item.qty);
 
+  console.log("Item", item);
+
   /*
    * When user changes the qty from product input update the cart in localStorage
    * Also update the cart in global context

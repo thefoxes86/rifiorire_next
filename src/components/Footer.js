@@ -54,10 +54,7 @@ const Footer = ({ menu }) => {
           Copyright &copy; {new Date().getFullYear()}RIFIORIRE S.N.C. - All
           rights reserved
         </div>
-        <div className="py-2">
-          {" "}
-          Privacy Policy - Terms and Conditions - Credits xdesigners{" "}
-        </div>
+        <div className="py-2"> Privacy Policy - Terms and Conditions</div>
       </footer>
     </>
   );

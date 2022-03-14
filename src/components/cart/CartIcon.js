@@ -11,7 +11,7 @@ const CartIcon = () => {
     null !== cart && Object.keys(cart).length ? cart.totalProductsPrice : "";
 
   return (
-    <Link href="/cart">
+    <Link href="/checkout">
       <a>
         {/* <svg
           xmlns="http://www.w3.org/2000/svg"

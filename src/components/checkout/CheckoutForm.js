@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import cx from "classnames";
-
+import { v4 } from "uuid";
 import YourOrder from "./YourOrder";
 import PaymentModes from "./PaymentModes";
 import { AppContext } from "../context/AppContext";
@@ -57,6 +58,8 @@ const defaultCustomerInfo = {
 
 const CheckoutForm = ({ countriesData }) => {
   const { billingCountries, shippingCountries } = countriesData || {};
+
+  const router = useRouter();
 
   const initialState = {
     billing: {
@@ -120,12 +123,33 @@ const CheckoutForm = ({ countriesData }) => {
     { data: shipping, loading, error },
   ] = useMutation(UPDATE_SHIPPING_METHODS, {
     onCompleted: () => {
-      console.log("here");
       if (shippingMethod === null) setShippingMethod("flat_rate:1");
       refetch();
     },
   });
   const [clearCartMutation] = useMutation(CLEAR_CART_MUTATION);
+
+  // Update Cart Mutation.
+  const [
+    updateCart,
+    {
+      data: updateCartResponse,
+      loading: updateCartProcessing,
+      error: updateCartError,
+    },
+  ] = useMutation(UPDATE_CART, {
+    onCompleted: () => {
+      refetch();
+    },
+    onError: (error) => {
+      if (error) {
+        const errorMessage = error?.graphQLErrors?.[0]?.message
+          ? error.graphQLErrors[0].message
+          : "";
+        setRequestError(errorMessage);
+      }
+    },
+  });
 
   /*
    * Handle form submit.
@@ -199,6 +223,24 @@ const CheckoutForm = ({ countriesData }) => {
    *
    * @return {void}
    */
+
+  // Update Cart Mutation.
+  const [
+    clearCart,
+    { data: clearCartRes, loading: clearCartProcessing, error: clearCartError },
+  ] = useMutation(CLEAR_CART_MUTATION, {
+    onCompleted: () => {
+      refetch();
+    },
+    onError: (error) => {
+      if (error) {
+        const errorMessage = !isEmpty(error?.graphQLErrors?.[0])
+          ? error.graphQLErrors[0]?.message
+          : "";
+        setRequestError(errorMessage);
+      }
+    },
+  });
 
   const handleOnChange = async (
     event,
@@ -293,6 +335,26 @@ const CheckoutForm = ({ countriesData }) => {
     );
   };
 
+  // Clear the entire cart.
+  const handleClearCart = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (clearCartProcessing) {
+      return;
+    }
+
+    await clearCart({
+      variables: {
+        input: {
+          clientMutationId: v4(),
+          all: true,
+        },
+      },
+    });
+    router.push("/");
+  };
+
   useEffect(async () => {
     updateShippingMethod({
       variables: {
@@ -374,6 +436,20 @@ const CheckoutForm = ({ countriesData }) => {
             <div className="your-orders">
               {/*	Order*/}
               <h2 className="text-xl font-medium mb-4">Il tuo ordine</h2>
+              <div className="clear-cart text-right">
+                <button
+                  className="px-4 py-1 bg-primary text-white rounded-sm w-auto"
+                  onClick={(event) => handleClearCart(event)}
+                  disabled={clearCartProcessing}
+                >
+                  <span className="woo-next-cart">Svuota Carrello</span>
+                  <i className="fa fa-arrow-alt-right" />
+                </button>
+                {clearCartProcessing ? <p>Sto svuotando il carrello...</p> : ""}
+                {updateCartProcessing ? (
+                  <p>Sto aggiornando il carrello...</p>
+                ) : null}
+              </div>
               <YourOrder cart={cart} />
 
               <ShippingMethods
@@ -387,20 +463,20 @@ const CheckoutForm = ({ countriesData }) => {
               <PaymentModes input={input} handleOnChange={handleOnChange} />
 
               <div className="woo-next-place-order-btn-wrap mt-5">
-                <button
-                  disabled={
-                    isOrderProcessing || paymentMethod !== null ? true : false
-                  }
-                  className={cx(
-                    "bg-secondary text-white px-5 py-3 rounded-sm w-auto xl:w-full",
-                    { "opacity-50": isOrderProcessing },
-                    { "opacity-50": !shippingMethod },
-                    { "opacity-50": !paymentMethod }
-                  )}
-                  type="submit"
-                >
-                  Ordina adesso
-                </button>
+                {!isOrderProcessing && (
+                  <button
+                    disabled={!paymentMethod ? true : false}
+                    className={cx(
+                      "bg-secondary text-white px-5 py-3 rounded-sm w-auto xl:w-full",
+                      { "opacity-50": isOrderProcessing },
+                      { "opacity-50": !shippingMethod },
+                      { "opacity-50": !paymentMethod }
+                    )}
+                    type="submit"
+                  >
+                    Ordina adesso
+                  </button>
+                )}
               </div>
 
               {/* Checkout Loading*/}

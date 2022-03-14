@@ -68,6 +68,7 @@ const GET_CART = gql`
           total
           subtotal
           subtotalTax
+          tax
         }
       }
       appliedCoupons {
@@ -94,6 +95,12 @@ const GET_CART = gql`
           methodId
         }
       }
+      contentsTotal
+      contentsTax
+      totalTaxes {
+        amount
+      }
+      displayPricesIncludeTax
     }
   }
 `;

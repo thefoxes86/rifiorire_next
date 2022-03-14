@@ -31,23 +31,34 @@ const YourOrder = ({ cart }) => {
 
               <tr className="bg-gray-200">
                 <td className="" />
-                <td className="woo-next-checkout-total font-normal text-xl">
-                  Costo di spedizione
+
+                <td className="woo-next-checkout-total font-normal text-md">
+                  Totale senza Iva
                 </td>
-                <td className="woo-next-checkout-total font-bold text-xl">
-                  {cart.shippingTotal}
+                <td className="woo-next-checkout-total font-bold text-md">
+                  {cart.subtotal}
                 </td>
               </tr>
               <tr className="bg-gray-200">
                 <td className="" />
 
-                <td className="woo-next-checkout-total font-normal text-xl">
-                  Totale senza Iva
+                <td className="woo-next-checkout-total font-normal text-md">
+                  Iva 22%
                 </td>
-                <td className="woo-next-checkout-total font-bold text-xl">
-                  {cart.total}
+                <td className="woo-next-checkout-total font-bold text-md">
+                  {cart.subtotalTax}
                 </td>
               </tr>
+              <tr className="bg-gray-200">
+                <td className="" />
+                <td className="woo-next-checkout-total font-normal text-md">
+                  Costo di spedizione
+                </td>
+                <td className="woo-next-checkout-total font-bold text-md">
+                  {cart.shippingTotal}
+                </td>
+              </tr>
+
               <tr className="bg-gray-200">
                 <td className="" />
 
